@@ -5,59 +5,38 @@ fun main() {
     gari.identity()
     println(gari.calculateParkingFees(5))
 
-    var basi=Bus("toyota","Mazda","White",8)
-    println(basi.maxTripFare(250.toDouble()*basi.capacity))
-    println(basi.calculateParkingFees(8))
+    var bus=Bus("toyota","Mazda","White",8)
+    println(bus.calculateParkingFees(8))
+    println(bus.maxTripFare(250.toDouble()*bus.capacity))
 }
-class Car(var make:String, var model:String, var color:String, var capacity:Int){
-    fun carry(people:Int){
-        var x=people-capacity
-        if (people==capacity){
-            println("Carrying $people passengers")
-        }
-        else{
-            println("Over capacity by $x people")
-        }
-    }
-        fun identity(){
-            println("I am a $color $make $model")
-        }
-        fun calculateParkingFees(hours:Int):Int{
-            return hours * 20
-
-        }
-    open class vehicle(var make:String, var model:String, var color:String, var capacity:Int){
-        fun carry(people:Int){
+class Car(make:String, model:String,color:String,capacity:Int):Vehicle(make,model,color,capacity) {
+}
+    open class Vehicle(var make:String, var model:String, var color:String, var capacity:Int) {
+        fun carry(people: Int) {
             println("Carry $people passengers")
-            var x=people-capacity
-            if(x==capacity){
+            var x = people - capacity
+            if (x == capacity) {
                 println("Carry $people passengers")
-            }else{
-                println{"Over capacity by $people"}
+            } else {
+                println("Over capacity by $people" )
+            }}
+            fun identity() {
+                println("I am a $color $make $model")
+            }
+
+           open fun calculateParkingFees(hours: Int): Int {
+                return hours * 20
+
+            } }
+
+
+        class Bus(make: String, model: String, color: String, capacity: Int) : Vehicle(make, model, color, capacity) {
+            fun maxTripFare(fare: Double): Double {
+                var a = 0
+                return a + fare
+            }
+            override fun calculateParkingFees(hours:Int):Int{
+                return hours * 20
             }
         }
-    }
 
-}
-class Bus(var make:String, var model:String, var color:String, var capacity:Int){
-    fun carry(people:Int){
-        var x=people-capacity
-        if (people==capacity){
-            println("Carrying $people passengers")
-        }
-        else{
-            println("Over capacity by $x people")
-        }
-    }
-    fun identity(){
-        println("I am a $color $make $model")
-    }
-    fun calculateParkingFees(hours:Int):Int{
-        return hours * 10
-
-    }
-    fun maxTripFare(fare:Double):Double{
-        var a=0
-        return a+ fare
-    }
-}
